@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f7fc">
+  <meta name="description" content="Plan a meeting across time zones and see each person's local date and time. Private, browser-only, and free.">
+  <title>Timefold — Day 06 Time Zone Meeting Planner</title>
+  <style>
+    :root{color-scheme:light;--ink:#15213a;--muted:#62708a;--line:#e1e7f1;--paper:#fff;--canvas:#f5f7fc;--blue:#3157d5;--blue-dark:#2343b4;--mint:#d8f8e9;--mint-ink:#167247;--gold:#fff3d8;--gold-ink:#8a5b08;--shadow:0 18px 48px rgba(26,45,83,.09);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 94% 0%,#e9edff 0,transparent 35%),var(--canvas);color:var(--ink);min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}.shell{width:min(1050px,calc(100% - 36px));margin:0 auto;padding:30px 0 50px}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:35px}.brand{display:flex;gap:11px;align-items:center;font-weight:800;letter-spacing:-.04em;font-size:19px}.brand-mark{width:37px;height:37px;background:#19294a;border-radius:12px;display:grid;place-items:center;color:white;font-size:17px;box-shadow:0 6px 14px #15213a20}.day-tag,.privacy-tag{font-size:12px;font-weight:700;color:#53617b;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px}.hero{max-width:760px;margin:0 0 25px}.eyebrow{color:var(--blue);font-size:12px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;margin-bottom:12px}h1{font-size:clamp(34px,5.5vw,57px);line-height:1.03;letter-spacing:-.055em;margin:0 0 14px;max-width:700px}.hero p{margin:0;color:var(--muted);font-size:16px;line-height:1.65;max-width:620px}.planner{background:var(--paper);border:1px solid #e3e9f3;border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.controls{padding:24px 26px 21px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:14px;align-items:end}.field label,.zone-label{display:block;font-size:12px;font-weight:750;color:#596781;margin:0 0 8px}.input-wrap{height:46px;border:1px solid #dbe2ee;border-radius:11px;display:flex;align-items:center;background:#fff;transition:.15s}.input-wrap:focus-within,.select:focus{border-color:#8098ef;box-shadow:0 0 0 3px #3157d51a;outline:0}.input-wrap span{padding-left:12px;color:#7c89a0;font-size:14px}.input-wrap input{border:0;outline:0;background:transparent;color:var(--ink);height:100%;width:100%;min-width:0;padding:0 10px}.select{height:46px;border:1px solid #dbe2ee;border-radius:11px;background:#fff;color:var(--ink);width:100%;padding:0 12px;outline:0}.section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 26px 13px}.section-head h2{font-size:15px;letter-spacing:-.02em;margin:0}.section-head p{font-size:12px;color:var(--muted);margin:5px 0 0}.add-row{display:flex;gap:8px;align-items:center}.add-row .select{width:min(250px,40vw);height:39px;font-size:13px}.button{border:0;border-radius:10px;background:var(--blue);color:#fff;font-weight:750;padding:11px 15px;box-shadow:0 5px 12px #3157d526;transition:transform .12s,background .12s}.button:hover{background:var(--blue-dark);transform:translateY(-1px)}.button:focus-visible,.icon-btn:focus-visible,.select:focus-visible{outline:3px solid #9bb0ff;outline-offset:2px}.button.secondary{background:#edf1ff;color:#2947b7;box-shadow:none}.button.secondary:hover{background:#e2e9ff}.people{padding:0 26px 16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.person{border:1px solid var(--line);border-radius:15px;padding:15px 16px 14px;background:linear-gradient(145deg,#fff,#fbfcff);position:relative;min-width:0}.person.host{border-color:#cdd7fb;background:linear-gradient(140deg,#f5f7ff,#fff)}.person-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.city{display:flex;align-items:center;gap:8px;font-weight:800;font-size:14px;min-width:0}.city-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.role{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--blue);background:#e9eeff;border-radius:999px;padding:5px 7px;white-space:nowrap}.remove{border:0;background:transparent;color:#98a3b6;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:18px;line-height:1;flex:0 0 auto}.remove:hover{background:#f0f2f7;color:#34425e}.local-label{font-size:11px;font-weight:700;color:#8792a7;text-transform:uppercase;letter-spacing:.08em;margin:14px 0 4px}.time{font-size:25px;line-height:1.15;letter-spacing:-.045em;font-weight:780}.date{font-size:13px;color:var(--muted);margin-top:5px}.current{font-size:12px;color:#65728a;margin-top:11px;padding-top:10px;border-top:1px solid #edf0f5;display:flex;justify-content:space-between;gap:8px}.work-pill{font-size:10px;font-weight:800;border-radius:999px;padding:4px 7px;white-space:nowrap;background:var(--mint);color:var(--mint-ink)}.work-pill.outside{background:#eff2f7;color:#66738a}.notice{margin:0 26px 18px;padding:11px 13px;border:1px solid #f1dfb5;border-radius:11px;background:#fffaf0;color:#71521a;font-size:12px;line-height:1.45;display:none}.notice.show{display:block}.actions{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 26px 21px;border-top:1px solid var(--line)}.actions-note{font-size:12px;color:var(--muted);line-height:1.5}.action-buttons{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.action-buttons .button{font-size:12px;padding:10px 12px}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,14px);background:#19294a;color:white;border-radius:11px;padding:11px 16px;font-size:13px;font-weight:650;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 10px 30px #14213b36}.toast.show{opacity:1;transform:translate(-50%,0)}.footer{display:flex;justify-content:space-between;gap:15px;color:#8893a7;font-size:11px;margin-top:16px;padding:0 4px}.footer a{color:#596781;text-decoration:none}.footer a:hover{text-decoration:underline}.empty{grid-column:1/-1;border:1px dashed #d6deeb;border-radius:14px;padding:24px;text-align:center;color:var(--muted);font-size:13px}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:720px){.shell{width:min(100% - 24px,560px);padding-top:20px}.topbar{margin-bottom:27px}.controls{grid-template-columns:1fr 1fr;padding:18px 17px}.field.zone{grid-column:1/-1}.section-head{align-items:flex-start;flex-direction:column;padding:17px 17px 12px}.add-row{width:100%}.add-row .select{flex:1;width:auto}.people{padding:0 17px 14px;grid-template-columns:1fr}.notice{margin:0 17px 15px}.actions{align-items:flex-start;flex-direction:column;padding:15px 17px 18px}.action-buttons{justify-content:flex-start}.footer{flex-direction:column}.time{font-size:23px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">↗</span><span>timefold</span></div>
+      <span class="day-tag">PROBLEM SOLVER · DAY 06</span>
+    </header>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow">Make the overlap obvious</div>
+      <h1 id="page-title">Find a meeting time that works everywhere.</h1>
+      <p>Pick a date and time once. See it in every teammate’s city, spot local work hours, then copy or share the plan.</p>
+    </section>
+
+    <section class="planner" aria-label="Time zone meeting planner">
+      <div class="controls">
+        <div class="field zone">
+          <label for="hostZone">Set the meeting time in</label>
+          <select class="select" id="hostZone" aria-label="Choose the time zone for the meeting time"></select>
+        </div>
+        <div class="field">
+          <label for="meetingDate">Meeting date</label>
+          <div class="input-wrap"><span aria-hidden="true">▦</span><input id="meetingDate" type="date"></div>
+        </div>
+        <div class="field">
+          <label for="meetingTime">Meeting time</label>
+          <div class="input-wrap"><span aria-hidden="true">◷</span><input id="meetingTime" type="time" value="10:00"></div>
+        </div>
+      </div>
+
+      <div class="section-head">
+        <div><h2>People &amp; local times</h2><p>Times update instantly for the selected date.</p></div>
+        <div class="add-row">
+          <label class="sr-only" for="addZone">Add a city time zone</label>
+          <select id="addZone" class="select"></select>
+          <button id="addButton" class="button secondary" type="button">+ Add city</button>
+        </div>
+      </div>
+      <div id="people" class="people" aria-live="polite"></div>
+      <p id="dstNotice" class="notice" role="status"></p>
+      <div class="actions">
+        <div class="actions-note">Work-hour indicator uses a simple 9:00 AM–5:00 PM guide.<br>All calculations stay in this browser.</div>
+        <div class="action-buttons">
+          <button id="copyButton" class="button secondary" type="button">Copy schedule</button>
+          <button id="shareButton" class="button" type="button">Copy share link</button>
+        </div>
+      </div>
+    </section>
+    <footer class="footer"><span>No account · No uploads · No tracking</span><a href="https://github.com/mhussain-codes/day-06-timezone-planner">View the source on GitHub</a></footer>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>
+    (()=>{
+      'use strict';
+      const zones=[
+        ['America/Los_Angeles','Los Angeles'],['America/Denver','Denver'],['America/Chicago','Chicago'],['America/New_York','New York'],
+        ['America/Toronto','Toronto'],['America/Sao_Paulo','São Paulo'],['Europe/London','London'],['Europe/Paris','Paris'],
+        ['Europe/Istanbul','Istanbul'],['Asia/Dubai','Dubai'],['Asia/Karachi','Karachi'],['Asia/Kolkata','New Delhi'],
+        ['Asia/Dhaka','Dhaka'],['Asia/Bangkok','Bangkok'],['Asia/Singapore','Singapore'],['Asia/Tokyo','Tokyo'],
+        ['Australia/Sydney','Sydney'],['Pacific/Auckland','Auckland'],['UTC','UTC']
+      ];
+      const labelByZone=new Map(zones);
+      const hostSelect=document.querySelector('#hostZone'),addSelect=document.querySelector('#addZone');
+      const dateInput=document.querySelector('#meetingDate'),timeInput=document.querySelector('#meetingTime');
+      const peopleEl=document.querySelector('#people'),noticeEl=document.querySelector('#dstNotice'),toastEl=document.querySelector('#toast');
+      const fallbackHost=labelByZone.has('Asia/Karachi')?'Asia/Karachi':'UTC';
+      const initial=readState();
+      let host=initial.host||fallbackHost;
+      let participants=(initial.zones||['Europe/London','America/New_York','Asia/Singapore','Asia/Tokyo']).filter(z=>labelByZone.has(z)&&z!==host);
+      let toastTimer;
+
+      function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+      function pad(n){return String(n).padStart(2,'0');}
+      function partsAt(date,zone){
+        const parts=new Intl.DateTimeFormat('en-CA',{timeZone:zone,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'long',hourCycle:'h23'}).formatToParts(date);
+        return Object.fromEntries(parts.filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));
+      }
+      function dateString(p){return `${p.year}-${p.month}-${p.day}`;}
+      function timeString(p){return `${p.hour}:${p.minute}`;}
+      function currentIn(zone){return partsAt(new Date(),zone);}
+      function wallToInstant(dateText,timeText,zone){
+        const [year,month,day]=dateText.split('-').map(Number),[hour,minute]=timeText.split(':').map(Number);
+        const target=Date.UTC(year,month-1,day,hour,minute);
+        let guess=target;
+        for(let i=0;i<5;i++){
+          const p=partsAt(new Date(guess),zone);
+          const represented=Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day),Number(p.hour),Number(p.minute));
+          const delta=target-represented;
+          if(delta===0)break;
+          guess+=delta;
+        }
+        const result=new Date(guess),actual=partsAt(result,zone);
+        const exact=dateString(actual)===dateText&&timeString(actual)===timeText;
+        return {date:result,actual,exact};
+      }
+      function longDate(p){return new Intl.DateTimeFormat('en',{timeZone:'UTC',weekday:'long',month:'long',day:'numeric',year:'numeric'}).format(new Date(Date.UTC(Number(p.year),Number(p.month)-1,Number(p.day))));}
+      function prettyTime(date,zone){return new Intl.DateTimeFormat('en',{timeZone:zone,hour:'numeric',minute:'2-digit',hour12:true}).format(date);}
+      function shortDate(date,zone){return new Intl.DateTimeFormat('en',{timeZone:zone,weekday:'short',month:'short',day:'numeric'}).format(date);}
+      function shortZone(date,zone){return new Intl.DateTimeFormat('en',{timeZone:zone,timeZoneName:'short'}).formatToParts(date).find(p=>p.type==='timeZoneName')?.value||zone;}
+      function dayDelta(actual,targetDate){
+        const [y,m,d]=targetDate.split('-').map(Number),base=Date.UTC(y,m-1,d),shown=Date.UTC(Number(actual.year),Number(actual.month)-1,Number(actual.day));
+        const days=Math.round((shown-base)/86400000);
+        return days===0?'Same day':days===1?'Next day':days===-1?'Previous day':days>1?`+${days} days`:`${days} days`;
+      }
+      function fillSelect(select,selected){select.innerHTML=zones.map(([zone,name])=>`<option value="${zone}" ${zone===selected?'selected':''}>${escapeHtml(name)} · ${zone}</option>`).join('');}
+      function render(){
+        fillSelect(hostSelect,host);
+        const used=new Set([host,...participants]);
+        const available=zones.filter(([z])=>!used.has(z));
+        addSelect.innerHTML=available.length?available.map(([z,n])=>`<option value="${z}">${escapeHtml(n)} · ${z}</option>`).join(''):'<option value="">All listed cities added</option>';
+        const scheduled=wallToInstant(dateInput.value,timeInput.value,host);
+        const all=[host,...participants];
+        peopleEl.innerHTML=all.map((zone,index)=>{
+          const name=labelByZone.get(zone)||zone,p=partsAt(scheduled.date,zone),now=currentIn(zone),localHour=Number(p.hour),working=localHour>=9&&localHour<17;
+          const role=index===0?'<span class="role">Meeting time set here</span>':`<button class="remove" type="button" data-remove="${escapeHtml(zone)}" aria-label="Remove ${escapeHtml(name)}" title="Remove city">×</button>`;
+          return `<article class="person ${index===0?'host':''}"><div class="person-top"><div class="city"><span class="city-name">${escapeHtml(name)}</span><span class="sr-only">${escapeHtml(shortZone(scheduled.date,zone))}</span></div>${role}</div><div class="local-label">Meeting time</div><div class="time">${escapeHtml(prettyTime(scheduled.date,zone))}</div><div class="date">${escapeHtml(shortDate(scheduled.date,zone))} <span aria-hidden="true">·</span> ${escapeHtml(dayDelta(p,dateInput.value))}</div><div class="current"><span>Now ${escapeHtml(prettyTime(new Date(),zone))} · ${escapeHtml(shortDate(new Date(),zone))}</span><span class="work-pill ${working?'':'outside'}">${working?'9–5 window':'Outside 9–5'}</span></div></article>`;
+        }).join('');
+        if(!scheduled.exact){noticeEl.textContent=`${timeInput.value} is skipped in ${labelByZone.get(host)} on this date because the clocks change. The browser resolves it to ${prettyTime(scheduled.date,host)}.`;noticeEl.classList.add('show');}
+        else{noticeEl.textContent='';noticeEl.classList.remove('show');}
+        syncUrl();
+      }
+      function stateUrl(){const url=new URL(location.href);url.search='';url.hash='';url.searchParams.set('date',dateInput.value);url.searchParams.set('time',timeInput.value);url.searchParams.set('host',host);url.searchParams.set('zones',participants.join(','));return url;}
+      function syncUrl(){try{history.replaceState(null,'',stateUrl());}catch{}}
+      function readState(){
+        const params=new URLSearchParams(location.search),date=params.get('date'),time=params.get('time'),h=params.get('host'),zs=params.get('zones');
+        const validDate=/^\d{4}-\d{2}-\d{2}$/.test(date||''),validTime=/^\d{2}:\d{2}$/.test(time||'');
+        return {date:validDate?date:null,time:validTime?time:null,host:labelByZone?.has?.(h)?h:null,zones:zs?zs.split(','):null};
+      }
+      function localDefaultDate(zone){const p=currentIn(zone);return dateString(p);}
+      function inviteText(){
+        const scheduled=wallToInstant(dateInput.value,timeInput.value,host);
+        const lines=[`Timefold meeting plan — ${longDate(scheduled.actual)}`,`Set in ${labelByZone.get(host)}: ${timeInput.value} (${host})`,'',...([host,...participants].map(z=>`${labelByZone.get(z)||z}: ${prettyTime(scheduled.date,z)} · ${shortDate(scheduled.date,z)} · ${shortZone(scheduled.date,z)}`)),'',`UTC: ${new Intl.DateTimeFormat('en',{timeZone:'UTC',dateStyle:'medium',timeStyle:'short'}).format(scheduled.date)}`];
+        return lines.join('\n');
+      }
+      async function copy(text,success){try{await navigator.clipboard.writeText(text);showToast(success);}catch{showToast('Clipboard access is unavailable here. Select and copy the schedule manually.');}}
+      function showToast(message){toastEl.textContent=message;toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),2600);}
+
+      const defaults=currentIn(fallbackHost);
+      dateInput.value=initial.date||dateString(defaults);
+      timeInput.value=initial.time||`${defaults.hour}:${defaults.minute}`;
+      hostSelect.addEventListener('change',()=>{host=hostSelect.value;participants=participants.filter(z=>z!==host);render();});
+      dateInput.addEventListener('input',render);timeInput.addEventListener('input',render);
+      document.querySelector('#addButton').addEventListener('click',()=>{const z=addSelect.value;if(z&&!participants.includes(z)&&z!==host&&participants.length<7){participants.push(z);render();}else if(participants.length>=7)showToast('You can compare up to eight cities at once.');});
+      peopleEl.addEventListener('click',event=>{const button=event.target.closest('[data-remove]');if(!button)return;participants=participants.filter(z=>z!==button.dataset.remove);render();});
+      document.querySelector('#copyButton').addEventListener('click',()=>copy(inviteText(),'Schedule copied.'));
+      document.querySelector('#shareButton').addEventListener('click',()=>copy(stateUrl().toString(),'Share link copied.'));
+      render();
+    })();
+  </script>
+</body>
+</html>
